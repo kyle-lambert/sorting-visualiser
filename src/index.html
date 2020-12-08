@@ -3,13 +3,53 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="./main.css">
-    <script src="./index.js" defer /></script>
+    <link rel="stylesheet" href="./main.css" />
+    <script src="./index.js" defer></script>
     <title>Sorting Visualiser</title>
   </head>
   <body>
-    Sorting Visualiser
+    <main>
+      <section class="container">
+        <div class="options">
+          <div class="options__item generate">
+            <button class="options__button" data-generate-button>Generate new Array</button>
+          </div>
+          <div class="options__item speed">
+            <label for="" class="options__label">Bar Count</label>
+            <select class="options__select">
+              <option value="20">20</option>
+              <option value="40">40</option>
+              <option value="60">60</option>
+              <option value="80">80</option>
+            </select>
+          </div>
+          <div class="options__item speed">
+            <label for="" class="options__label">Sort Speed</label>
+            <select class="options__select">
+              <option value="1">Extra Slow</option>
+              <option value="2">Slow</option>
+              <option value="3">Medium</option>
+              <option value="4">Fast</option>
+              <option value="5">Extra Fast</option>
+            </select>
+          </div>
+          <div class="options__item algo">
+            <label for="" class="options__label">Sort Algorithm</label>
+            <select class="options__select">
+              <option value="merge-sort">Merge Sort</option>
+              <option value="quick-sort">Quick Sort</option>
+              <option value="heap-sort">Heap Sort</option>
+              <option value="bubble-sort">Bubble Sort</option>
+            </select>
+          </div>
+          <div class="options__item start">
+            <button class="options__button">Start Sorting</button>
+          </div>
+        </div>
+      </section>
+      <section class="container">
+        <div class="board" data-board></div>
+      </section>
+    </main>
   </body>
 </html>
-
-

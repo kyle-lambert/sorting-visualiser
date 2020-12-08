@@ -11,8 +11,50 @@ html {
 }
 
 body {
-  font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto,
-    Helvetica Neue, Arial, sans-serif, sans-serif;
+  font-family: -apple-system, system-ui, BlinkMacSystemFont, Segoe UI, Roboto, Helvetica Neue, Arial,
+    sans-serif, sans-serif;
   font-size: 16px;
   overscroll-behavior: none;
+  min-height: 100vh;
+}
+
+.container {
+  max-width: 1440px;
+  padding: 0 10%;
+  margin: 0 auto;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  margin-top: 30px;
+  padding: 20px 20px;
+  background-color: teal;
+  border-radius: 10px;
+}
+
+.options__item {
+  margin-right: 40px;
+}
+.options__item:last-child {
+  margin-right: unset;
+}
+
+.options__item.start {
+  margin-left: auto;
+}
+
+.board {
+  margin-top: 30px;
+  display: flex;
+  align-items: flex-end;
+  height: 500px;
+}
+
+.board__bar {
+  background-color: coral;
+  border-radius: 5px;
+  margin: 0 5px;
+  height: 20%;
+  flex: 1;
 }
