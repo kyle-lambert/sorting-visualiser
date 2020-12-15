@@ -1,32 +1,40 @@
-import Board from "./models/Board";
-import * as boardView from "./views/boardView";
+import Sort from "./models/Sort";
+import SortController from "./controllers/SortController";
+import SortView from "./views/SortView";
 
-const state = {};
+const app = new SortController(new Sort(), new SortView());
 
-document.addEventListener("DOMContentLoaded", () => {
-  boardController();
-});
+console.log(app);
 
-function boardController() {
-  const initialiseBoard = () => {
-    state.board = new Board();
-    state.board.generateBoard();
-    boardView.renderBars(state.board.bars);
-  };
+// import Board from "./models/Board";
+// import * as boardView from "./views/boardView";
 
-  document.querySelector("[data-generate-button]").addEventListener("click", (e) => {
-    e.preventDefault();
-    state.board.generateBoard();
-    boardView.renderBars(state.board.bars);
-    console.log(state.board);
-  });
+// const state = {};
 
-  document.querySelector("[data-bar-count]").addEventListener("change", (e) => {
-    const barCount = Number.parseFloat(e.target.value);
-    state.board.setBarCount(barCount);
-    state.board.generateBoard();
-    boardView.renderBars(state.board.bars);
-  });
+// document.addEventListener("DOMContentLoaded", () => {
+//   boardController();
+// });
 
-  initialiseBoard();
-}
+// function boardController() {
+//   const initialiseBoard = () => {
+//     state.board = new Board();
+//     state.board.generateBoard();
+//     boardView.renderBars(state.board.bars);
+//   };
+
+//   document.querySelector("[data-generate-button]").addEventListener("click", (e) => {
+//     e.preventDefault();
+//     state.board.generateBoard();
+//     boardView.renderBars(state.board.bars);
+//     console.log(state.board);
+//   });
+
+//   document.querySelector("[data-bar-count]").addEventListener("change", (e) => {
+//     const barCount = Number.parseFloat(e.target.value);
+//     state.board.setBarCount(barCount);
+//     state.board.generateBoard();
+//     boardView.renderBars(state.board.bars);
+//   });
+
+//   initialiseBoard();
+// }

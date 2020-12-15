@@ -12,11 +12,11 @@
       <section class="container">
         <div class="options">
           <div class="options__item generate">
-            <button class="options__button" data-generate-button>Generate new Array</button>
+            <button class="options__button" data-js="newNodesButton">Generate New Nodes</button>
           </div>
           <div class="options__item speed">
-            <label for="" class="options__label">Bar Count</label>
-            <select class="options__select" data-bar-count>
+            <label for="" class="options__label">Node Count</label>
+            <select class="options__select" data-js="nodeCountSelect">
               <option value="20">20</option>
               <option value="40">40</option>
               <option value="60">60</option>
@@ -24,8 +24,8 @@
             </select>
           </div>
           <div class="options__item speed">
-            <label for="" class="options__label">Sort Speed</label>
-            <select class="options__select">
+            <label for="" class="options__label">Animation Speed</label>
+            <select class="options__select" data-js="animationSpeedSelect">
               <option value="1">Extra Slow</option>
               <option value="2">Slow</option>
               <option value="3">Medium</option>
@@ -35,7 +35,7 @@
           </div>
           <div class="options__item algo">
             <label for="" class="options__label">Sort Algorithm</label>
-            <select class="options__select">
+            <select class="options__select" data-js="algorithmSelect">
               <option value="merge-sort">Merge Sort</option>
               <option value="quick-sort">Quick Sort</option>
               <option value="heap-sort">Heap Sort</option>
@@ -43,12 +43,12 @@
             </select>
           </div>
           <div class="options__item start">
-            <button class="options__button">Start Sorting</button>
+            <button class="options__button" data-js="startSortButton">Start Sorting</button>
           </div>
         </div>
       </section>
       <section class="container">
-        <div class="board" data-board></div>
+        <div class="board" data-js="nodeList"></div>
       </section>
     </main>
   </body>
