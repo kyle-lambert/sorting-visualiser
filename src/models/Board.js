@@ -4,14 +4,14 @@ import { generateRandomNumber } from "../helpers";
 export default class Board {
   constructor() {
     this.bars = [];
-    this.size = 30;
+    this.barCount = 20;
     this.speed = 10;
     this.algorithm = "bubble-sort";
   }
 
   generateBoard() {
     const bars = [];
-    for (let i = 0; i < this.size; i++) {
+    for (let i = 0; i < this.barCount; i++) {
       bars.push(new Node(generateRandomNumber(10, 100)));
     }
     this.bars = bars;
@@ -25,7 +25,7 @@ export default class Board {
     this.speed = num;
   }
 
-  setSize(num) {
-    this.size = num;
+  setBarCount(num) {
+    this.barCount = num;
   }
 }

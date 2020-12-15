@@ -21,5 +21,12 @@ function boardController() {
     console.log(state.board);
   });
 
+  document.querySelector("[data-bar-count]").addEventListener("change", (e) => {
+    const barCount = Number.parseFloat(e.target.value);
+    state.board.setBarCount(barCount);
+    state.board.generateBoard();
+    boardView.renderBars(state.board.bars);
+  });
+
   initialiseBoard();
 }
