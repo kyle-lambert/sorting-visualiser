@@ -36,14 +36,14 @@ export default class SortView {
     });
   }
 
-  renderFrame(trace) {
+  renderFrame(frame) {
     this.clearNodes();
-    const { array, compare, swap, sortedIndices } = trace;
+    const { array, compare, pivot, swap, sortedIndices } = frame;
 
-    array.forEach((t, i) => {
+    array.forEach((a, i) => {
       const node = this.createElement("div");
       node.classList.add("board__bar");
-      node.style.height = t + "%";
+      node.style.height = a + "%";
 
       if (compare[0] === i || compare[1] === i) {
         node.classList.add("board__bar--compare");
@@ -51,6 +51,10 @@ export default class SortView {
 
       if (swap[0] === i || swap[1] === i) {
         node.classList.add("board__bar--swap");
+      }
+
+      if (pivot === i) {
+        node.classList.add("board__bar--pivot");
       }
 
       if (sortedIndices.includes(i)) {
@@ -61,11 +65,11 @@ export default class SortView {
     });
   }
 
-  renderAnimationFrames(trace, speed) {
-    trace.forEach((t, i) => {
+  renderFrames(frames, speed) {
+    frames.forEach((f, i) => {
       this.timeout = setTimeout(() => {
-        this.renderFrame(t);
-      }, 20 * i);
+        this.renderFrame(f);
+      }, speed * i);
     });
   }
 }

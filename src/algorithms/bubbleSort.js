@@ -1,42 +1,43 @@
-export default function bubbleSort(nodes) {
-  const trace = newTrace(nodes);
+export default function bubbleSort(array) {
+  const frames = newFrame(array);
 
-  for (let i = 0; i < nodes.length; i++) {
-    for (let j = 0; j < nodes.length - i - 1; j++) {
-      addToTrace(trace, nodes, lastSorted(trace), [j, j + 1], []);
-      if (nodes[j] > nodes[j + 1]) {
-        let tmp = nodes[j];
-        nodes[j] = nodes[j + 1];
-        nodes[j + 1] = tmp;
-        addToTrace(trace, nodes, lastSorted(trace), [], [j, j + 1]);
+  for (let i = 0; i < array.length; i++) {
+    for (let j = 0; j < array.length - i - 1; j++) {
+      addToFrame(frames, array, lastSortedIndices(frames), [j, j + 1], [], []);
+      if (array[j] > array[j + 1]) {
+        let tmp = array[j];
+        array[j] = array[j + 1];
+        array[j + 1] = tmp;
+        addToFrame(frames, array, lastSortedIndices(frames), [], [j, j + 1], []);
       }
     }
-    addToTrace(trace, nodes, [...lastSorted(trace), nodes.length - 1 - i]);
+    addToFrame(frames, array, [...lastSortedIndices(frames), array.length - 1 - i], []);
   }
-  console.log(trace);
-  return trace;
+  return frames;
 }
 
-function newTrace(nodes) {
+function newFrame(array) {
   return [
     {
-      array: nodes.slice(0),
+      array: array.slice(0),
       sortedIndices: [],
       compare: [],
       swap: [],
+      pivot: [],
     },
   ];
 }
 
-function addToTrace(trace, array, sortedIndices = [], compare = [], swap = []) {
-  trace.push({
+function addToFrame(frames, array, sortedIndices = [], compare = [], swap = [], pivot = []) {
+  frames.push({
     array: [...array],
     sortedIndices: [...sortedIndices],
     compare: [...compare],
     swap: [...swap],
+    pivot: [...pivot],
   });
 }
 
-function lastSorted(trace) {
-  return trace[trace.length - 1].sortedIndices;
+function lastSortedIndices(frames) {
+  return frames[frames.length - 1].sortedIndices;
 }

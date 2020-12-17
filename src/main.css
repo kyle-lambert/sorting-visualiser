@@ -67,6 +67,10 @@ body {
   background-color: blueviolet;
 }
 
+.board__bar--pivot {
+  background-color: yellow;
+}
+
 .board__bar--sorted {
   background-color: blue;
 }

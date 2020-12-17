@@ -1,14 +1,15 @@
 import Node from "./Node";
 import { generateRandomNumber } from "../helpers";
 import bubbleSort from "../algorithms/bubbleSort";
+import quickSort from "../algorithms/quickSort";
 
 export default class Sort {
   constructor() {
     this.nodes = [];
     this.nodeCount = 20;
-    this.animationFrames = [];
+    this.frames = [];
     this.animationSpeed = 400;
-    this.algorithm = "bubbleSort";
+    this.algorithm = "quickSort";
     this.isAnimating = false;
     this.initialiseNodes();
   }
@@ -24,14 +25,17 @@ export default class Sort {
   sortNodes() {
     switch (this.algorithm) {
       case "bubbleSort": {
-        this.animationFrames = bubbleSort(this.nodes);
-        // console.log(this.animationFrames);
+        this.frames = bubbleSort(this.nodes);
         break;
       }
       case "mergeSort": {
         break;
       }
       case "quickSort": {
+        this.frames = quickSort(this.nodes);
+        // console.log(this.frames);
+        // console.log(this.frames);
+        // console.log(quickSort(this.nodes));
         break;
       }
       case "heapSort": {

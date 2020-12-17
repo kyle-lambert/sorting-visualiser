@@ -14,7 +14,7 @@ export default class SortController {
   }
 
   runAnimation() {
-    this.view.renderAnimationFrames(this.model.animationFrames, this.model.animationSpeed);
+    this.view.renderFrames(this.model.frames, this.model.animationSpeed);
   }
 
   bindGenerateNodesEvent() {
