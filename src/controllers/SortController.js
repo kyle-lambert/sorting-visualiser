@@ -2,27 +2,58 @@ export default class SortController {
   constructor(model, view) {
     this.model = model;
     this.view = view;
-
-    this.onNodeListChanged(this.model.nodes);
-    this.view.bindNodeCountChanged(this.handleNodeCount.bind(this));
-    this.view.bindAnimationSpeedChanged(this.handleAnimationSpeed.bind(this));
-    this.view.bindGenerateNewNodes(this.handleGenerateNewNodes.bind(this));
-    this.model.bindNodeCountChanged(this.onNodeListChanged.bind(this));
+    this.bindGenerateNodesEvent();
+    this.bindNodeCountEvent();
+    this.bindAnimationSpeedEvent();
+    this.bindStartSortEvent();
+    this.bindAlgorithmEvent();
   }
 
-  onNodeListChanged(nodes) {
-    this.view.displayNodes(nodes);
+  init() {
+    this.view.renderNodes(this.model.nodes);
   }
 
-  handleGenerateNewNodes() {
-    this.model.generateNodes();
+  runAnimation() {
+    this.view.renderAnimationFrames(this.model.animationFrames, this.model.animationSpeed);
   }
 
-  handleNodeCount(num) {
-    this.model.setNodeCount(num);
+  bindGenerateNodesEvent() {
+    this.view.elements.generateNodesButton.addEventListener("click", () => {
+      if (!this.model.isAnimating) {
+        this.model.generateNodes();
+        this.view.renderNodes(this.model.nodes);
+      }
+    });
   }
 
-  handleAnimationSpeed(num) {
-    this.model.setAnimationSpeed(num);
+  bindNodeCountEvent() {
+    this.view.elements.nodeCountSelect.addEventListener("change", (e) => {
+      this.model.setNodeCount(e.target.value);
+      this.model.generateNodes();
+      this.view.renderNodes(this.model.nodes);
+    });
+  }
+
+  bindAnimationSpeedEvent() {
+    this.view.elements.animationSpeedSelect.addEventListener("change", (e) => {
+      this.model.setAnimationSpeed(e.target.value);
+    });
+  }
+
+  bindStartSortEvent() {
+    this.view.elements.startSortButton.addEventListener("click", () => {
+      if (!this.model.isAnimating) {
+        this.model.sortNodes();
+        this.runAnimation();
+      }
+    });
+  }
+
+  bindAlgorithmEvent() {
+    this.view.elements.algorithmSelect.addEventListener("change", (e) => {
+      if (!this.model.isAnimating) {
+        this.model.setAlgorithm(e.target.value);
+      }
+    });
   }
 }

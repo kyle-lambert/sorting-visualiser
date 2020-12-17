@@ -1,45 +1,66 @@
 import Node from "./Node";
 import { generateRandomNumber } from "../helpers";
+import bubbleSort from "../algorithms/bubbleSort";
 
 export default class Sort {
   constructor() {
     this.nodes = [];
     this.nodeCount = 20;
-    this.frames = [];
-    this.animationSpeed = 10;
+    this.animationFrames = [];
+    this.animationSpeed = 400;
+    this.algorithm = "bubbleSort";
     this.isAnimating = false;
-    this.onNodeListChanged = null;
     this.initialiseNodes();
   }
 
   initialiseNodes() {
     const nodes = [];
     for (let i = 0; i < this.nodeCount; i++) {
-      nodes.push(new Node(generateRandomNumber(10, 100)));
+      nodes.push(generateRandomNumber(10, 100));
     }
     this.nodes = nodes;
+  }
+
+  sortNodes() {
+    switch (this.algorithm) {
+      case "bubbleSort": {
+        this.animationFrames = bubbleSort(this.nodes);
+        // console.log(this.animationFrames);
+        break;
+      }
+      case "mergeSort": {
+        break;
+      }
+      case "quickSort": {
+        break;
+      }
+      case "heapSort": {
+        break;
+      }
+      default: {
+        console.log("Algorithm no found!");
+      }
+    }
   }
 
   generateNodes() {
     const nodes = [];
     for (let i = 0; i < this.nodeCount; i++) {
-      nodes.push(new Node(generateRandomNumber(10, 100)));
+      nodes.push(generateRandomNumber(10, 100));
     }
     this.nodes = nodes;
-    this.onNodeListChanged(this.nodes);
   }
 
   setNodeCount(count) {
     this.nodeCount = Number.parseInt(count);
-    this.generateNodes();
-    this.onNodeListChanged(this.nodes);
   }
 
   setAnimationSpeed(speed) {
     this.animationSpeed = Number.parseInt(speed);
   }
 
-  bindNodeCountChanged(callback) {
-    this.onNodeListChanged = callback;
+  setAlgorithm(algo) {
+    this.algorithm = algo;
+    console.log(this.algorithm);
   }
 }

@@ -1,11 +1,14 @@
 export default class SortView {
   constructor() {
-    this.nodeList = this.getElement('[data-js="nodeList"]');
-    this.nodeCountSelect = this.getElement('[data-js="nodeCountSelect"]');
-    this.animationSpeedSelect = this.getElement('[data-js="animationSpeedSelect"]');
-    this.algorithmSelect = this.getElement('[data-js="algorithmSelect"]');
-    this.startSortButton = this.getElement('[data-js="startSortButton"]');
-    this.newNodesButton = this.getElement('[data-js="newNodesButton"]');
+    this.elements = {
+      nodeList: this.getElement('[data-js="nodeList"]'),
+      nodeCountSelect: this.getElement('[data-js="nodeCountSelect"]'),
+      animationSpeedSelect: this.getElement('[data-js="animationSpeedSelect"]'),
+      algorithmSelect: this.getElement('[data-js="algorithmSelect"]'),
+      startSortButton: this.getElement('[data-js="startSortButton"]'),
+      generateNodesButton: this.getElement('[data-js="generateNodesButton"]'),
+    };
+    this.timeout = null;
   }
 
   getElement(selector) {
@@ -17,39 +20,52 @@ export default class SortView {
   }
 
   clearNodes() {
-    this.nodeList.innerHTML = "";
-  }
-
-  displayNodes(nodes) {
-    while (this.nodeList.firstChild) {
-      this.nodeList.removeChild(this.nodeList.firstChild);
-    }
-
-    if (nodes.length > 0) {
-      nodes.forEach((n) => {
-        const node = this.createElement("div");
-        node.classList.add("board__bar");
-        node.style.height = n.value + "%";
-        this.nodeList.append(node);
-      });
+    while (this.elements.nodeList.firstChild) {
+      this.elements.nodeList.removeChild(this.elements.nodeList.firstChild);
     }
   }
 
-  bindGenerateNewNodes(handler) {
-    this.newNodesButton.addEventListener("click", (e) => {
-      handler();
+  renderNodes(nodes) {
+    this.clearNodes();
+
+    nodes.forEach((n) => {
+      const node = this.createElement("div");
+      node.classList.add("board__bar");
+      node.style.height = n + "%";
+      this.elements.nodeList.append(node);
     });
   }
 
-  bindNodeCountChanged(handler) {
-    this.nodeCountSelect.addEventListener("change", (e) => {
-      handler(e.target.value);
+  renderFrame(trace) {
+    this.clearNodes();
+    const { array, compare, swap, sortedIndices } = trace;
+
+    array.forEach((t, i) => {
+      const node = this.createElement("div");
+      node.classList.add("board__bar");
+      node.style.height = t + "%";
+
+      if (compare[0] === i || compare[1] === i) {
+        node.classList.add("board__bar--compare");
+      }
+
+      if (swap[0] === i || swap[1] === i) {
+        node.classList.add("board__bar--swap");
+      }
+
+      if (sortedIndices.includes(i)) {
+        node.classList.add("board__bar--sorted");
+      }
+
+      this.elements.nodeList.append(node);
     });
   }
 
-  bindAnimationSpeedChanged(handler) {
-    this.animationSpeedSelect.addEventListener("change", (e) => {
-      handler(e.target.value);
+  renderAnimationFrames(trace, speed) {
+    trace.forEach((t, i) => {
+      this.timeout = setTimeout(() => {
+        this.renderFrame(t);
+      }, 20 * i);
     });
   }
 }

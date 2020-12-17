@@ -58,3 +58,15 @@ body {
   height: 20%;
   flex: 1;
 }
+
+.board__bar--compare {
+  background-color: green;
+}
+
+.board__bar--swap {
+  background-color: blueviolet;
+}
+
+.board__bar--sorted {
+  background-color: blue;
+}
